@@ -17,7 +17,7 @@ ChooseCat = ()=>{
      fetch('https://opentdb.com/api_category.php')
     .then(data => data.json())
     .then(result => {
-         let arrs = result["trivia_categories"];
+         let arrs = result;
          chose = arrs[Math.floor(random(1,arrs.length))-1]["id"];
          console.log(chose);
      });
