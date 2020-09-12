@@ -2,17 +2,29 @@ let correct,
     score = (localStorage.getItem('quiz_correct') ? localStorage.getItem('quiz_correct') : 0),
     wrong = (localStorage.getItem('quiz-wrong')? localStorage.getItem('quiz-wrong') : 0);
 document.addEventListener('DOMContentLoaded',function(){
-    loadQues();
+    loadQues(ChooseCat());
     eventlistn();
 });
+function random(mn, mx) {  
+   return Math.random() * (mx - mn) + mn;  
+}  
 eventlistn = ()=>{
     document.querySelector('#check-answer').addEventListener('click',validateAns);
     document.querySelector('#clear-storage').addEventListener('click',ClearRes);
 }
-
+ChooseCat = ()=>{
+    let chose;
+     fetch('https://opentdb.com/api_category.php')
+    .then(data => data.json())
+    .then(result => {
+         let arrs = result["trivia_categories"];
+         chose = arrs[Math.floor(random(1,arrs.length))-1]["id"];
+     });
+    return chose;
+}
 //Loads questions from an API
-loadQues = () =>{
-    fetch('https://opentdb.com/api.php?amount=1&category=18&type=multiple')
+loadQues = (cat) =>{
+    fetch('https://opentdb.com/api.php?amount=1&category='+cat+'&type=multiple')
     .then(data => data.json())
     .then(result => displayResult(result.results));
 }
@@ -101,7 +113,7 @@ checkAns = () =>{
         app.removeChild(app.firstChild);
     }
     //load a question
-    loadQues();
+    loadQues(ChooseCat());
 }
 SaveinStroe = () => {
     localStorage.setItem('quiz_correct',score);
