@@ -13,7 +13,7 @@ eventlistn = ()=>{
     document.querySelector('#clear-storage').addEventListener('click',ClearRes);
 }
 ChooseCat = ()=>{
-   return random(9,32);
+   return parseInt(random(9,32));
 }
 //Loads questions from an API
 loadQues = (cat) =>{
