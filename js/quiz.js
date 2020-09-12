@@ -19,6 +19,7 @@ ChooseCat = ()=>{
     .then(result => {
          let arrs = result["trivia_categories"];
          chose = arrs[Math.floor(random(1,arrs.length))-1]["id"];
+         console.log(chose);
      });
     return chose;
 }
