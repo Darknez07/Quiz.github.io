@@ -13,15 +13,7 @@ eventlistn = ()=>{
     document.querySelector('#clear-storage').addEventListener('click',ClearRes);
 }
 ChooseCat = ()=>{
-    let chose;
-     fetch('https://opentdb.com/api_category.php')
-    .then(data => data.json())
-    .then(result => {
-         let arrs = result;
-         chose = arrs[Math.floor(random(1,arrs.length))-1]["id"];
-         console.log(chose);
-     });
-    return chose;
+   return random(9,32);
 }
 //Loads questions from an API
 loadQues = (cat) =>{
